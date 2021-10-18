@@ -1,6 +1,6 @@
 from app import app, db
 from flask import render_template, redirect, url_for
-from flask_login import login_user, logout_user
+from flask_login import login_user, logout_user, login_required, current_user
 from app.forms import LoginForm, RegistrationForm
 from app.models import Product, User
 
@@ -61,3 +61,20 @@ def login():
 def logout():
     logout_user()
     return redirect(url_for('index'))
+
+
+@app.route('/my-cart')
+@login_required
+def my_cart():
+    my_products = current_user.products
+    return render_template('products.html', products=my_products)
+
+
+
+@app.route('/add-to-cart/<prod_id>')
+@login_required
+def add_to_cart(prod_id):
+    product = Product.query.get_or_404(prod_id)
+    current_user.products.append(product)
+    db.session.commit()
+    return redirect(url_for('my_cart'))
