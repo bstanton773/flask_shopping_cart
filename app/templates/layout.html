@@ -13,12 +13,13 @@
     <body>
 
         {% include 'nav.html' %}
+        <div class="container">
+            {% block content %}
+    
+            {% endblock content %}
+        </div>
 
-        {% block content %}
-
-        {% endblock content %}
-
-        <div>Footer is here.</div>
+        <!-- <div>Footer is here.</div> -->
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.0/js/bootstrap.min.js"></script>

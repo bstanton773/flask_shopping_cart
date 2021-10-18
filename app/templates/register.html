@@ -4,7 +4,8 @@
 
     <h1>Register!</h1>
 
-    <form action="">
+    <form action="" method="post">
+        {{ form.csrf_token }}
         <div class="form-group">
             <fieldset>
                 {{ form.username.label }}
